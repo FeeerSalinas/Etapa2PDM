@@ -52,6 +52,23 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         db?.execSQL(CREATE_ACTIVIDADES_TABLE)
     }
 
+    fun getAllDestinos(): List<DestinoTuristico> {
+        val destinosList = mutableListOf<DestinoTuristico>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM DestinosTuristicos", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val idDestinoTuristico = cursor.getInt(cursor.getColumnIndexOrThrow("idDestinoTuristico"))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
+                val imagen = cursor.getString(cursor.getColumnIndexOrThrow("imagen"))
+                destinosList.add(DestinoTuristico(idDestinoTuristico, nombre, descripcion, imagen))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return destinosList
+    }
+
     fun insertDestinoTuristico(destino: DestinoTuristico): Long {
         val db = this.writableDatabase
 
