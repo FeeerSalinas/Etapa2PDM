@@ -18,5 +18,13 @@ class PaginaInicio : AppCompatActivity() {
 
         }
 
+        val btnDestacados: ImageButton = findViewById(R.id.btnDestacados)
+        btnDestacados.setOnClickListener{
+
+            val intent: Intent = Intent(this, ActividadesTuristicas::class.java)
+            startActivity(intent)
+
+        }
+
     }
 }

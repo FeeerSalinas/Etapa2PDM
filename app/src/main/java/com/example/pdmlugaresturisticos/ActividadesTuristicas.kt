@@ -1,9 +1,11 @@
 package com.example.pdmlugaresturisticos
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Toast
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
@@ -34,6 +36,14 @@ class ActividadesTuristicas : AppCompatActivity() {
         btnAgregar.setOnClickListener {
             agregarActividadTuristica()
     }
+
+        val btnBack: ImageButton = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener{
+
+            val intent: Intent = Intent(this, PaginaInicio::class.java)
+            startActivity(intent)
+
+        }
 }
 
     private fun agregarActividadTuristica() {
