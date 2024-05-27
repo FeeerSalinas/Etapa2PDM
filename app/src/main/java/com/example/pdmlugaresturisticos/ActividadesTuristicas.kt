@@ -1,12 +1,14 @@
 package com.example.pdmlugaresturisticos
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.Toast
+import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
+import com.example.pdmlugaresturisticos.models.DestinoTuristico
+import kotlinx.coroutines.launch
 
 class ActividadesTuristicas : AppCompatActivity() {
 
@@ -15,8 +17,10 @@ class ActividadesTuristicas : AppCompatActivity() {
     private lateinit var txtImagen: EditText
     private lateinit var txtFecha: EditText
     private lateinit var txtCosto: EditText
-    private lateinit var txtLugarTuristico: EditText
+    private lateinit var spinnerLugares: Spinner
     private lateinit var btnAgregar: Button
+
+    private var lugaresList: List<DestinoTuristico> = listOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,13 +32,34 @@ class ActividadesTuristicas : AppCompatActivity() {
         txtImagen = findViewById(R.id.txtImagen)
         txtFecha = findViewById(R.id.txtFecha)
         txtCosto = findViewById(R.id.txtCosto)
-        txtLugarTuristico = findViewById(R.id.txtLugarTuristico)
+        spinnerLugares = findViewById(R.id.spinnerLugares)
         btnAgregar = findViewById(R.id.btnAgregar)
 
         btnAgregar.setOnClickListener {
             agregarActividadTuristica()
+        }
+
+        val btnBack: ImageButton = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent: Intent = Intent(this, PaginaInicio::class.java)
+            startActivity(intent)
+        }
+
+        // Cargar los datos del Spinner desde la base de datos
+        loadDestinos()
     }
-}
+
+    private fun loadDestinos() {
+        lifecycleScope.launch {
+            val dbHelper = DataBaseHelper(this@ActividadesTuristicas)
+            lugaresList = dbHelper.getAllDestinos()
+
+            val nombresLugares = lugaresList.map { it.nombre }
+            val adapter = ArrayAdapter(this@ActividadesTuristicas, android.R.layout.simple_spinner_item, nombresLugares)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerLugares.adapter = adapter
+        }
+    }
 
     private fun agregarActividadTuristica() {
         val nombreActividad = txtNombreActividad.text.toString()
@@ -42,7 +67,8 @@ class ActividadesTuristicas : AppCompatActivity() {
         val imagen = txtImagen.text.toString()
         val fecha = txtFecha.text.toString()
         val costo = txtCosto.text.toString().toDoubleOrNull()
-        val idDestinoTuristico = txtLugarTuristico.text.toString().toIntOrNull()
+        val selectedPosition = spinnerLugares.selectedItemPosition
+        val idDestinoTuristico = if (selectedPosition >= 0) lugaresList[selectedPosition].idDestinoTuristico else null
 
         if (nombreActividad.isNotEmpty() && descripcion.isNotEmpty() && imagen.isNotEmpty() &&
             fecha.isNotEmpty() && costo != null && idDestinoTuristico != null) {
@@ -76,6 +102,6 @@ class ActividadesTuristicas : AppCompatActivity() {
         txtImagen.text.clear()
         txtFecha.text.clear()
         txtCosto.text.clear()
-        txtLugarTuristico.text.clear()
+        spinnerLugares.setSelection(0)
     }
 }

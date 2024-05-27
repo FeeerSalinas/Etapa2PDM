@@ -7,15 +7,34 @@
     android:background="#97D9F6"
     tools:context=".ActividadesTuristicas">
 
+    <!-- Botón para regresar -->
+
     <!-- ImageView -->
+
+
+
     <ImageView
         android:id="@+id/portada"
         android:layout_width="match_parent"
         android:layout_height="180dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:scaleType="centerCrop"
         app:srcCompat="@mipmap/fondo" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Regresar"
+        android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <!-- CardView -->
     <com.google.android.material.card.MaterialCardView
@@ -86,7 +105,7 @@
                     android:hint="Ingrese el nombre de la actividad"
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp" />
@@ -120,7 +139,7 @@
                     android:hint="Ingrese la descripción"
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="12dp"
                     android:paddingBottom="5dp" />
             </LinearLayout>
 
@@ -151,7 +170,7 @@
                     android:hint="Ingrese la imagen"
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp" />
@@ -184,7 +203,7 @@
                     android:hint="Ingrese la fecha"
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp" />
@@ -217,43 +236,44 @@
 
                     android:paddingStart="10dp"
                     android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
+                    android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
                     android:paddingBottom="5dp" />
             </LinearLayout>
 
+            <!-- Campo para lugar turístico -->
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:padding="4dp"
-                    android:text="Lugar turistico:"
+                    android:padding="3dp"
+                    android:text="Lugar Turístico:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/txtLugarTuristico"
-                    style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox"
-                    android:layout_width="match_parent"
+                <Spinner
+                    android:id="@+id/spinnerLugares"
+                    android:layout_width="350dp"
                     android:layout_height="wrap_content"
-                    android:background="#E9E3E3"
-                    android:gravity="center_vertical"
-                    android:hint="Ingrese el lugar turistico al que pertenece"
-
-                    android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
-                    android:paddingTop="5dp"
-                    android:paddingEnd="10dp"
-                    android:paddingRight="10dp"
-                    android:paddingBottom="5dp" />
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#E8E2E2"
+                    android:foregroundTint="#636161"
+                    android:paddingStart="12dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="3dp"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <Button
