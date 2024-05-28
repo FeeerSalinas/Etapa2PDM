@@ -122,4 +122,7 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_ACTIVIDADES_NAME")
         onCreate(db)
     }
+
+   
+
 }
