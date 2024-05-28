@@ -26,5 +26,13 @@ class PaginaInicio : AppCompatActivity() {
 
         }
 
+        val btnNotificaciones: ImageButton = findViewById(R.id.btnNotificacion)
+        btnNotificaciones.setOnClickListener{
+
+            val intent: Intent = Intent(this, ViewActividadesTuristicas::class.java)
+            startActivity(intent)
+
+        }
+
     }
 }
