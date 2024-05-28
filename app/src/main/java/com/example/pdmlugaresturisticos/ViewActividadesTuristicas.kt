@@ -28,6 +28,18 @@ class ViewActividadesTuristicas : AppCompatActivity() {
             val intent = Intent(this, PaginaInicio::class.java)
             startActivity(intent)
         }
+        val btnAgregar: ImageButton = findViewById(R.id.btnAgregar)
+        btnAgregar.setOnClickListener{
+
+            val intent: Intent = Intent(this, ActividadesTuristicas::class.java)
+            startActivity(intent)
+
+        }
+        val btnBack: ImageButton = findViewById(R.id.btnBack)
+        btnBack.setOnClickListener {
+            val intent: Intent = Intent(this, ViewActividadesTuristicas::class.java)
+            startActivity(intent)
+        }
 
         loadActividades()
     }
