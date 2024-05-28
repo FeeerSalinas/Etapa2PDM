@@ -116,6 +116,27 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         return result
     }
 
+    fun getAllActividades(): List<ActividadTuristica> {
+        val actividadesList = mutableListOf<ActividadTuristica>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM ActividadesTuristicas", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow("id"))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow("nombre"))
+                val descripcion = cursor.getString(cursor.getColumnIndexOrThrow("descripcion"))
+                val imagen = cursor.getString(cursor.getColumnIndexOrThrow("imagen"))
+                val fecha = cursor.getString(cursor.getColumnIndexOrThrow("fecha"))
+                val costo = cursor.getDouble(cursor.getColumnIndexOrThrow("costo"))
+                val idDestinoTuristico = cursor.getInt(cursor.getColumnIndexOrThrow("idDestinoTuristico"))
+                actividadesList.add(ActividadTuristica(id, nombre, descripcion, imagen, fecha, costo, idDestinoTuristico))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return actividadesList
+    }
+
+
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_DESTINOS_NAME")
