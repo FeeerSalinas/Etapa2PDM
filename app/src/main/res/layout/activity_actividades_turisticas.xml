@@ -7,15 +7,34 @@
     android:background="#97D9F6"
     tools:context=".ActividadesTuristicas">
 
+    <!-- Botón para regresar -->
+
     <!-- ImageView -->
+
+
+
     <ImageView
         android:id="@+id/portada"
         android:layout_width="match_parent"
-        android:layout_height="202dp"
+        android:layout_height="180dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="0dp"
         android:scaleType="centerCrop"
         app:srcCompat="@mipmap/fondo" />
+
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:contentDescription="Regresar"
+        android:src="@drawable/baseline_arrow_back_ios_24" />
 
     <!-- CardView -->
     <com.google.android.material.card.MaterialCardView
@@ -71,8 +90,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Nombre de la actividad:"
                     android:padding="4dp"
+                    android:text="Nombre de la actividad:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
@@ -85,19 +104,19 @@
                     android:gravity="center_vertical"
                     android:hint="Ingrese el nombre de la actividad"
                     android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="5dp" />
             </LinearLayout>
 
             <!-- Campo 2 -->
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
@@ -105,8 +124,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Descripcion:"
                     android:padding="4dp"
+                    android:text="Descripcion:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
@@ -119,25 +138,25 @@
                     android:gravity="center_vertical"
                     android:hint="Ingrese la descripción"
                     android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="5dp" />
             </LinearLayout>
 
             <!-- Campo 3 -->
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Imagen:"
                     android:padding="4dp"
+                    android:text="Imagen:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
@@ -150,27 +169,27 @@
                     android:gravity="center_vertical"
                     android:hint="Ingrese la imagen"
                     android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="5dp" />
             </LinearLayout>
 
             <!-- Campo 4 -->
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Fecha:"
                     android:padding="4dp"
+                    android:text="Fecha:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
@@ -183,26 +202,26 @@
                     android:gravity="center_vertical"
                     android:hint="Ingrese la fecha"
                     android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="5dp" />
             </LinearLayout>
             <!-- Campo 5 -->
             <LinearLayout
                 android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
                 android:layout_gravity="center"
+                android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-thin"
-                    android:text="Costo:"
                     android:padding="4dp"
+                    android:text="Costo:"
                     android:textColor="#8C8484"
                     android:textStyle="bold" />
 
@@ -216,17 +235,51 @@
                     android:hint="Ingrese el costo"
 
                     android:paddingStart="10dp"
-                    android:paddingLeft="12dp"
+                    android:paddingLeft="10dp"
                     android:paddingTop="12dp"
                     android:paddingEnd="10dp"
                     android:paddingRight="10dp"
-                    android:paddingBottom="10dp" />
+                    android:paddingBottom="5dp" />
+            </LinearLayout>
+
+            <!-- Campo para lugar turístico -->
+            <LinearLayout
+                android:layout_width="350dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="5dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-thin"
+                    android:padding="3dp"
+                    android:text="Lugar Turístico:"
+                    android:textColor="#8C8484"
+                    android:textStyle="bold" />
+
+                <Spinner
+                    android:id="@+id/spinnerLugares"
+                    android:layout_width="350dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:background="#E8E2E2"
+                    android:foregroundTint="#636161"
+                    android:paddingStart="12dp"
+                    android:paddingLeft="5dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="5dp"
+                    android:paddingRight="5dp"
+                    android:paddingBottom="3dp"
+                    android:spinnerMode="dropdown" />
             </LinearLayout>
 
             <Button
                 android:id="@+id/btnAgregar"
                 android:layout_width="241dp"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="16dp"
                 android:text="Agregar" />
