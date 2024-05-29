@@ -41,7 +41,7 @@ class ActividadesTuristicas : AppCompatActivity() {
 
         val btnBack: ImageButton = findViewById(R.id.btnBack)
         btnBack.setOnClickListener {
-            val intent: Intent = Intent(this, PaginaInicio::class.java)
+            val intent: Intent = Intent(this, ViewActividadesTuristicas::class.java)
             startActivity(intent)
         }
 

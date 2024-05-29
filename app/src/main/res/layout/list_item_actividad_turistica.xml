@@ -43,4 +43,12 @@
         android:text="Costo"
         android:textSize="14sp" />
 
+    <ImageButton
+        android:id="@+id/btnEliminarActividad"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:background="#00FFFFFF"
+        android:src="@drawable/baseline_auto_delete_24"
+        android:text="Eliminar"></ImageButton>
+
 </LinearLayout>

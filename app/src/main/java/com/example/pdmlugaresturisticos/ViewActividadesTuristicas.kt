@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
 import android.widget.ListView
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.pdmlugaresturisticos.adapter.ActividadesListAdapter
@@ -11,7 +12,9 @@ import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import kotlinx.coroutines.launch
 
-class ViewActividadesTuristicas : AppCompatActivity() {
+
+
+class ViewActividadesTuristicas : AppCompatActivity(), ActividadesListAdapter.OnDeleteClickListener {
 
     private lateinit var listViewActividades: ListView
     private lateinit var btnBack: ImageButton
@@ -35,22 +38,35 @@ class ViewActividadesTuristicas : AppCompatActivity() {
             startActivity(intent)
 
         }
-        val btnBack: ImageButton = findViewById(R.id.btnBack)
-        btnBack.setOnClickListener {
-            val intent: Intent = Intent(this, ViewActividadesTuristicas::class.java)
-            startActivity(intent)
-        }
 
         loadActividades()
     }
+
+
+
 
     private fun loadActividades() {
         lifecycleScope.launch {
             val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
             actividadesList = dbHelper.getAllActividades()
 
-            val adapter = ActividadesListAdapter(this@ViewActividadesTuristicas, actividadesList)
+            val adapter = ActividadesListAdapter(this@ViewActividadesTuristicas, actividadesList, this@ViewActividadesTuristicas)
             listViewActividades.adapter = adapter
         }
+    }
+
+    override fun onDeleteClick(actividad: ActividadTuristica) {
+        val alertDialog = AlertDialog.Builder(this)
+            .setTitle("Eliminar Actividad Turística")
+            .setMessage("¿Estás seguro de que deseas eliminar esta actividad turística?")
+            .setPositiveButton("Eliminar") { dialog, which ->
+                val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
+                dbHelper.deleteActividadTuristica(actividad.id.toLong())
+                loadActividades()
+            }
+            .setNegativeButton("Cancelar", null)
+            .create()
+
+        alertDialog.show()
     }
 }

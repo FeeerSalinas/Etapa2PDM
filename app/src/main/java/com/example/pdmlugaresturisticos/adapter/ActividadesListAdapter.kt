@@ -5,13 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.pdmlugaresturisticos.R
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.squareup.picasso.Picasso
 
-class ActividadesListAdapter(private val context: Context, private val dataSource: List<ActividadTuristica>) : BaseAdapter() {
+
+class ActividadesListAdapter(private val context: Context, private val dataSource: List<ActividadTuristica>, private val onDeleteClickListener: OnDeleteClickListener) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -46,6 +48,18 @@ class ActividadesListAdapter(private val context: Context, private val dataSourc
         // Usar Picasso para cargar la imagen desde una URL
         Picasso.get().load(actividad.imagen).into(imagenImageView)
 
+        val btnEliminarActividad = rowView.findViewById<ImageButton>(R.id.btnEliminarActividad)
+
+        btnEliminarActividad.setOnClickListener {
+            onDeleteClickListener.onDeleteClick(actividad)
+        }
+
         return rowView
     }
+
+    interface OnDeleteClickListener {
+        fun onDeleteClick(actividad: ActividadTuristica)
+    }
+
 }
+
