@@ -43,12 +43,43 @@
         android:text="Costo"
         android:textSize="14sp" />
 
-    <ImageButton
-        android:id="@+id/btnEliminarActividad"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="#00FFFFFF"
-        android:src="@drawable/baseline_auto_delete_24"
-        android:text="Eliminar"></ImageButton>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btnEliminarActividad"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/borrar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="-11dp"
+            app:tint="#AE0C0C" />
+
+        <ImageButton
+            android:id="@+id/btnReservarActividad"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/guardar"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="-11dp"
+            app:tint="#06AC0D" />
+
+        <ImageButton
+            android:id="@+id/btnMegusta"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/precioso"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="-150dp"
+            app:tint="#870D37" />
+    </LinearLayout>
+
+
 
 </LinearLayout>
