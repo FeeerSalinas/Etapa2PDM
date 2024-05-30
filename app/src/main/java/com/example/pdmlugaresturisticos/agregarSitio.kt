@@ -1,10 +1,12 @@
 package com.example.pdmlugaresturisticos
 
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
@@ -48,6 +50,15 @@ class agregarSitio : AppCompatActivity() {
         btnAgregarSitio.setOnClickListener {
             agregarSitioTuristico()
         }
+
+        //movilidad con los botones
+        val btnAgregadas: Button = findViewById(R.id.btnVerAgregados)
+        btnAgregadas.setOnClickListener{
+
+            val intent: Intent = Intent(this, mostrarSitiosTuristicos::class.java)
+            startActivity(intent)
+        }
+
     }
 
     private fun agregarSitioTuristico() {

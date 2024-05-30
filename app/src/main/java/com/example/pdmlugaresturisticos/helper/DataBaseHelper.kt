@@ -4,6 +4,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
 
@@ -116,13 +117,65 @@ class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAM
         return result
     }
 
+    //metodos de fernando
+
+    //metodo para actualizar sitios
+    fun updateSitio(id: Int, nombre: String, descripcion: String, imagen: String){
+        val values = ContentValues()
+        values.put(DESTINOS_NOMBRE, nombre)
+        values.put(DESTINOS_DESCRIPCION, descripcion)
+        values.put(DESTINOS_IMAGEN, imagen)
+        val db = this.writableDatabase
+        db.update(
+            TABLE_DESTINOS_NAME,
+            values,
+            "$DESTINOS_ID_KEY = ?",
+            arrayOf(id.toString())
+        )
+
+    }
+
+    //metodos para devolver los sitios
+
+    fun getAllSitios(): ArrayList<DestinoTuristico>{
+        val listSitios = ArrayList<DestinoTuristico>()
+        val selectQuery = "SELECT $DESTINOS_ID_KEY, $DESTINOS_NOMBRE, $DESTINOS_DESCRIPCION, $DESTINOS_IMAGEN FROM $TABLE_DESTINOS_NAME"
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        while(cursor.moveToNext()){
+            val IdSitio = cursor.getInt(cursor.getColumnIndexOrThrow(DESTINOS_ID_KEY))
+            val NombreSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_NOMBRE))
+            val DescripcionSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_DESCRIPCION))
+            val ImagenSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_IMAGEN))
+
+            //GUARDANDO
+            val SitioInfo = DestinoTuristico(IdSitio, NombreSitio, DescripcionSitio, ImagenSitio)
+            listSitios.add(SitioInfo)
+        }
+        cursor.close()
+        db.close()
+        Log.i("DATA", "EL GETALL JALA")
+        return listSitios
+
+
+    }
+
+    //Funcion para eliminar
+    fun deleteSitios(id: String){
+        val db = writableDatabase
+        db.delete(
+            TABLE_DESTINOS_NAME,
+            "$DESTINOS_ID_KEY = ?",
+            arrayOf(id)
+        )
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_DESTINOS_NAME")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_ACTIVIDADES_NAME")
         onCreate(db)
     }
-
-   
 
 }
