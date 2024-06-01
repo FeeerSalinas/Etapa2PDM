@@ -6,17 +6,20 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.ImageButton
 import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.pdmlugaresturisticos.adapter.ActividadesListAdapter
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
+import com.example.pdmlugaresturisticos.models.Usuario
 import kotlinx.coroutines.launch
 
 
 
-class ViewActividadesTuristicas : AppCompatActivity(), ActividadesListAdapter.OnDeleteClickListener {
+class ViewActividadesTuristicas : AppCompatActivity(),
+    ActividadesListAdapter.OnDeleteClickListener, ActividadesListAdapter.OnReserveClickListener {
 
     private lateinit var listViewActividades: ListView
     private lateinit var btnBack: ImageButton
@@ -35,8 +38,13 @@ class ViewActividadesTuristicas : AppCompatActivity(), ActividadesListAdapter.On
         }
         val btnAgregar: ImageButton = findViewById(R.id.btnAgregar)
         btnAgregar.setOnClickListener{
-
             val intent: Intent = Intent(this, ActividadesTuristicas::class.java)
+            startActivity(intent)
+
+        }
+        val btnReservaciones: ImageButton = findViewById(R.id.btnReservaciones)
+        btnReservaciones.setOnClickListener{
+            val intent: Intent = Intent(this, DetallesReservaciones::class.java)
             startActivity(intent)
 
         }
@@ -45,14 +53,12 @@ class ViewActividadesTuristicas : AppCompatActivity(), ActividadesListAdapter.On
     }
 
 
-
-
     private fun loadActividades() {
         lifecycleScope.launch {
             val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
             actividadesList = dbHelper.getAllActividades()
 
-            val adapter = ActividadesListAdapter(this@ViewActividadesTuristicas, actividadesList, this@ViewActividadesTuristicas)
+            val adapter = ActividadesListAdapter(this@ViewActividadesTuristicas, actividadesList, this@ViewActividadesTuristicas, this@ViewActividadesTuristicas)
             listViewActividades.adapter = adapter
         }
     }
@@ -71,4 +77,18 @@ class ViewActividadesTuristicas : AppCompatActivity(), ActividadesListAdapter.On
 
         alertDialog.show()
     }
+
+    override fun onReserveClick(actividad: ActividadTuristica) {
+        val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
+        val idReservacion = dbHelper.insertReserva(actividad.id.toLong()) // Insertar la reservación en la base de datos
+        if (idReservacion != -1L) {
+            Toast.makeText(this, "Reservación exitosa", Toast.LENGTH_SHORT).show()
+            // Actualizar la lista de actividades después de hacer la reservación si es necesario
+            loadActividades()
+        } else {
+            Toast.makeText(this, "Error al realizar la reservación", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+
 }
