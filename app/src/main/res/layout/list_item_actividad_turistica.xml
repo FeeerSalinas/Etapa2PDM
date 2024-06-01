@@ -63,23 +63,20 @@
             android:id="@+id/btnReservarActividad"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#00FFFFFF"
-            android:src="@mipmap/guardar"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="-11dp"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/garrapata"
             app:tint="#06AC0D" />
 
         <ImageButton
             android:id="@+id/btnMegusta"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#00FFFFFF"
-            android:src="@mipmap/precioso"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="-150dp"
-            app:tint="#870D37" />
+            android:background="#00FFFFFF"
+            android:src="@mipmap/megusta"
+            app:tint="#888569" />
     </LinearLayout>
-
-
-
 </LinearLayout>

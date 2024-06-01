@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
+import com.example.pdmlugaresturisticos.models.Reservacion
 
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
@@ -29,6 +30,13 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         private const val ACTIVIDADES_FECHA = "fecha"
         private const val ACTIVIDADES_COSTO = "costo"
         private const val ACTIVIDADES_DESTINO_ID_KEY = "idDestinoTuristico"
+
+        // Tabla Reservaciones
+        private const val TABLE_RESERVACIONES_NAME = "Reservaciones"
+        private const val RESERVACIONES_ID_KEY = "id"
+        private const val RESERVACIONES_ID_USUARIO = "idUsuario"
+        private const val RESERVACIONES_ID_ACTIVIDAD = "idActividadTuristica"
+
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
@@ -48,8 +56,16 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$ACTIVIDADES_DESTINO_ID_KEY INTEGER, " +
                 "FOREIGN KEY($ACTIVIDADES_DESTINO_ID_KEY) REFERENCES $TABLE_DESTINOS_NAME($DESTINOS_ID_KEY))"
 
+        val CREATE_RESERVACIONES_TABLE = "CREATE TABLE $TABLE_RESERVACIONES_NAME (" +
+                "$RESERVACIONES_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$RESERVACIONES_ID_USUARIO INTEGER, " +
+                "$RESERVACIONES_ID_ACTIVIDAD INTEGER, " +
+                "FOREIGN KEY($RESERVACIONES_ID_ACTIVIDAD) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
+
+
         db?.execSQL(CREATE_DESTINOS_TABLE)
         db?.execSQL(CREATE_ACTIVIDADES_TABLE)
+        db?.execSQL(CREATE_RESERVACIONES_TABLE)
     }
 
     fun getAllDestinos(): List<DestinoTuristico> {
@@ -136,9 +152,38 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return actividadesList
     }
 
+    fun insertReservacion(idUsuario: Int, idActividadTuristica: Int): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(RESERVACIONES_ID_USUARIO, idUsuario)
+            put(RESERVACIONES_ID_ACTIVIDAD, idActividadTuristica)
+        }
+        val id = db.insert(TABLE_RESERVACIONES_NAME, null, values)
+        db.close()
+        return id
+    }
+
+    fun getAllReservaciones(): List<Reservacion> {
+        val reservacionesList = mutableListOf<Reservacion>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_RESERVACIONES_NAME", null)
+        if (cursor.moveToFirst()) {
+            do {
+                val id = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_KEY))
+                val idUsuario = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_USUARIO))
+                val idActividadTuristica = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_ACTIVIDAD))
+                reservacionesList.add(Reservacion(id, idUsuario, idActividadTuristica))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return reservacionesList
+    }
+
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_DESTINOS_NAME")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_ACTIVIDADES_NAME")
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_RESERVACIONES_NAME")
         onCreate(db)
     }
 }
