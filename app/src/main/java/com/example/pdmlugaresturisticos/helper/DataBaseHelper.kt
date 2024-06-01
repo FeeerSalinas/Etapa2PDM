@@ -42,9 +42,9 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         // Tabla Reservaciones
         private const val TABLE_RESERVACIONES_NAME = "Reservaciones"
-        private const val RESERVACIONES_ID_KEY = "id"
-        private const val RESERVACIONES_ID_USUARIO = "idUsuario"
-        private const val RESERVACIONES_ID_ACTIVIDAD = "idActividadTuristica"
+        private const val RESERVACIONES_ID_KEY = "idReserva"
+        private const val RESERVACIONES_USUARIO_ID = "idUsuario"
+        private const val RESERVACIONES_ACTIVIDAD_ID = "idActividadTuristica"
 
     }
 
@@ -73,17 +73,17 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         val CREATE_RESERVACIONES_TABLE = "CREATE TABLE $TABLE_RESERVACIONES_NAME (" +
                 "$RESERVACIONES_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "$RESERVACIONES_ID_USUARIO INTEGER, " +
-                "$RESERVACIONES_ID_ACTIVIDAD INTEGER, " +
-                "FOREIGN KEY($RESERVACIONES_ID_ACTIVIDAD) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
+                "$RESERVACIONES_USUARIO_ID INTEGER, " +
+                "$RESERVACIONES_ACTIVIDAD_ID INTEGER, " +
+                "FOREIGN KEY($RESERVACIONES_USUARIO_ID) REFERENCES $TABLE_USUARIOS_NAME($USUARIO_ID_KEY), " +
+                "FOREIGN KEY($RESERVACIONES_ACTIVIDAD_ID) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
 
         db?.execSQL(CREATE_USUARIOS_TABLE)
         db?.execSQL(CREATE_DESTINOS_TABLE)
         db?.execSQL(CREATE_ACTIVIDADES_TABLE)
         db?.execSQL(CREATE_RESERVACIONES_TABLE)
 
-        // Log para verificar la creación de la tabla de usuarios
-        Log.d("DatabaseHelper", "Table '$TABLE_USUARIOS_NAME' created successfully")
+
 
     }
 
@@ -169,6 +169,27 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         cursor.close()
         return actividadesList
+    }
+    fun insertReserva(idUsuario: Long, idActividad: Long): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(RESERVACIONES_USUARIO_ID, idUsuario)
+            put(RESERVACIONES_ACTIVIDAD_ID, idActividad)
+        }
+        val result = db.insert(TABLE_RESERVACIONES_NAME, null, values)
+        db.close()
+        return result
+    }
+    fun insertUsuario(usuario: Usuario): Long {
+        val db = this.writableDatabase
+        val values = ContentValues().apply {
+            put(USUARIO_NOMBRE, usuario.nombre)
+            put(USUARIO_CONTRASENA, usuario.contrasena)
+            put(USUARIO_ROL_ID, usuario.rolId)
+        }
+        val id = db.insert(TABLE_USUARIOS_NAME, null, values)
+        db.close()
+        return id
     }
 
 

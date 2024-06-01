@@ -8,15 +8,16 @@ import android.widget.BaseAdapter
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import com.example.pdmlugaresturisticos.R
-import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.squareup.picasso.Picasso
 
-
-class ActividadesListAdapter(private val context: Context, private val dataSource: List<ActividadTuristica>, private val onDeleteClickListener: OnDeleteClickListener) : BaseAdapter() {
+class ActividadesListAdapter(
+    private val context: Context,
+    private val dataSource: List<ActividadTuristica>,
+    private val onDeleteClickListener: OnDeleteClickListener,
+    //private val onReserveClickListener: OnReserveClickListener
+) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
 
@@ -52,18 +53,23 @@ class ActividadesListAdapter(private val context: Context, private val dataSourc
         Picasso.get().load(actividad.imagen).into(imagenImageView)
 
         val btnEliminarActividad = rowView.findViewById<ImageButton>(R.id.btnEliminarActividad)
-
         btnEliminarActividad.setOnClickListener {
             onDeleteClickListener.onDeleteClick(actividad)
         }
 
+        /*val btnReservarActividad = rowView.findViewById<ImageButton>(R.id.btnReservarActividad)
+        btnReservarActividad.setOnClickListener {
+            onReserveClickListener.onReserveClick(actividad)
+        }*/
+
         return rowView
     }
-
 
     interface OnDeleteClickListener {
         fun onDeleteClick(actividad: ActividadTuristica)
     }
 
+    interface OnReserveClickListener {
+        fun onReserveClick(actividad: ActividadTuristica)
+    }
 }
-
