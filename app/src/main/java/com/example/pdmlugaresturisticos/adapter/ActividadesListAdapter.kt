@@ -56,31 +56,10 @@ class ActividadesListAdapter(private val context: Context, private val dataSourc
         btnEliminarActividad.setOnClickListener {
             onDeleteClickListener.onDeleteClick(actividad)
         }
-        // Dentro del método getView() de ActividadesListAdapter
-
-        // Agregar el OnClickListener para reservar la actividad
-        val btnReservarActividad = rowView.findViewById<ImageButton>(R.id.btnReservarActividad)
-        btnReservarActividad.setOnClickListener {
-            AlertDialog.Builder(context)
-                .setTitle("Reservar Actividad")
-                .setMessage("¿Estás seguro de que deseas reservar esta actividad?")
-                .setPositiveButton("Reservar") { dialog, which ->
-                    // Llamar al método para insertar la reserva en la base de datos
-                    val dbHelper = DataBaseHelper(context)
-                    val actividadId = actividad.id
-                    // Establecer el ID de usuario predeterminado en 1
-                    val userId = 1
-                    dbHelper.insertReservacion(userId, actividadId.toInt())
-                    // Actualizar la vista o realizar cualquier otra acción necesaria después de la reserva
-                    // Por ejemplo, podrías mostrar un mensaje de confirmación
-                    Toast.makeText(context, "Actividad reservada con éxito", Toast.LENGTH_SHORT).show()
-                }
-                .setNegativeButton("Cancelar", null)
-                .show()
-        }
 
         return rowView
     }
+
 
     interface OnDeleteClickListener {
         fun onDeleteClick(actividad: ActividadTuristica)

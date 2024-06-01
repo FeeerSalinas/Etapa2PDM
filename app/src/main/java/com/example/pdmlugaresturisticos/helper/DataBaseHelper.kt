@@ -4,15 +4,24 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
 import com.example.pdmlugaresturisticos.models.Reservacion
+import com.example.pdmlugaresturisticos.models.Usuario
 
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_VERSION = 1
         private const val DATABASE_NAME = "Turismo.db"
+
+        // Tabla Usuarios
+        private const val TABLE_USUARIOS_NAME = "Usuarios"
+        private const val USUARIO_ID_KEY = "idUsuario"
+        private const val USUARIO_NOMBRE = "usuario"
+        private const val USUARIO_CONTRASENA = "pass"
+        private const val USUARIO_ROL_ID = "idRol"
 
         // Tabla DestinosTuristicos
         private const val TABLE_DESTINOS_NAME = "DestinosTuristicos"
@@ -40,6 +49,12 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
+        val CREATE_USUARIOS_TABLE = "CREATE TABLE $TABLE_USUARIOS_NAME (" +
+                "$USUARIO_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "$USUARIO_NOMBRE TEXT, " +
+                "$USUARIO_CONTRASENA TEXT, " +
+                "$USUARIO_ROL_ID INTEGER)"
+
         val CREATE_DESTINOS_TABLE = "CREATE TABLE $TABLE_DESTINOS_NAME (" +
                 "$DESTINOS_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$DESTINOS_NOMBRE TEXT, " +
@@ -62,10 +77,14 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$RESERVACIONES_ID_ACTIVIDAD INTEGER, " +
                 "FOREIGN KEY($RESERVACIONES_ID_ACTIVIDAD) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
 
-
+        db?.execSQL(CREATE_USUARIOS_TABLE)
         db?.execSQL(CREATE_DESTINOS_TABLE)
         db?.execSQL(CREATE_ACTIVIDADES_TABLE)
         db?.execSQL(CREATE_RESERVACIONES_TABLE)
+
+        // Log para verificar la creación de la tabla de usuarios
+        Log.d("DatabaseHelper", "Table '$TABLE_USUARIOS_NAME' created successfully")
+
     }
 
     fun getAllDestinos(): List<DestinoTuristico> {
@@ -152,35 +171,9 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return actividadesList
     }
 
-    fun insertReservacion(idUsuario: Int, idActividadTuristica: Int): Long {
-        val db = this.writableDatabase
-        val values = ContentValues().apply {
-            put(RESERVACIONES_ID_USUARIO, idUsuario)
-            put(RESERVACIONES_ID_ACTIVIDAD, idActividadTuristica)
-        }
-        val id = db.insert(TABLE_RESERVACIONES_NAME, null, values)
-        db.close()
-        return id
-    }
-
-    fun getAllReservaciones(): List<Reservacion> {
-        val reservacionesList = mutableListOf<Reservacion>()
-        val db = this.readableDatabase
-        val cursor = db.rawQuery("SELECT * FROM $TABLE_RESERVACIONES_NAME", null)
-        if (cursor.moveToFirst()) {
-            do {
-                val id = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_KEY))
-                val idUsuario = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_USUARIO))
-                val idActividadTuristica = cursor.getInt(cursor.getColumnIndexOrThrow(RESERVACIONES_ID_ACTIVIDAD))
-                reservacionesList.add(Reservacion(id, idUsuario, idActividadTuristica))
-            } while (cursor.moveToNext())
-        }
-        cursor.close()
-        return reservacionesList
-    }
-
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+        db?.execSQL("DROP TABLE IF EXISTS $TABLE_USUARIOS_NAME")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_DESTINOS_NAME")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_ACTIVIDADES_NAME")
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_RESERVACIONES_NAME")
