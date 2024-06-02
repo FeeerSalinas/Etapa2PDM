@@ -163,10 +163,19 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
             put(RESERVACIONES_USUARIO_ID, idUsuario)
             put(RESERVACIONES_ACTIVIDAD_ID, idActividad)
         }
-        val result = db.insert(TABLE_RESERVACIONES_NAME, null, values)
-        db.close()
-        return result
+        return try {
+            val result = db.insert(TABLE_RESERVACIONES_NAME, null, values)
+            Log.d("DB Insert", "Reserva insertada con ID: $result")
+            result
+        } catch (e: Exception) {
+            Log.e("DB Insert Error", "Error al insertar la reserva: ${e.message}", e)
+            -1L
+        } finally {
+            db.close()
+        }
     }
+
+
     fun getAllReservaciones(): List<Reservacion> {
         val reservacionesList = mutableListOf<Reservacion>()
         val db = this.readableDatabase

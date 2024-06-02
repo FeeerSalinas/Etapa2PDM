@@ -1,3 +1,5 @@
+package com.example.pdmlugaresturisticos.adapter
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,36 +9,24 @@ import android.widget.TextView
 import com.example.pdmlugaresturisticos.R
 import com.example.pdmlugaresturisticos.models.Reservacion
 
-class ReservacionesListAdapter(
-    private val context: Context,
-    private val dataSource: List<Reservacion>
-) : BaseAdapter() {
+class ReservacionesListAdapter(private val context: Context,
+                               private val reservacionesList: List<Reservacion>,
 
-    private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+    ) : BaseAdapter() {
 
-    override fun getCount(): Int {
-        return dataSource.size
-    }
+    override fun getCount(): Int = reservacionesList.size
 
-    override fun getItem(position: Int): Any {
-        return dataSource[position]
-    }
+    override fun getItem(position: Int): Any = reservacionesList[position]
 
-    override fun getItemId(position: Int): Long {
-        return dataSource[position].id.toLong()
-    }
+    override fun getItemId(position: Int): Long = reservacionesList[position].id.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
-        val rowView = convertView ?: inflater.inflate(R.layout.list_item_reservacion, parent, false)
+        val view: View = convertView ?: LayoutInflater.from(context).inflate(R.layout.list_item_reservacion, parent, false)
 
-        val reservacion = getItem(position) as Reservacion
+        val textViewReservacion = view.findViewById<TextView>(R.id.textViewReservacion)
+        val reservacion = reservacionesList[position]
+        textViewReservacion.text = "ID Reservación: ${reservacion.id}, ID Usuario: ${reservacion.idUsuario}, ID Actividad: ${reservacion.idActividadTuristica}"
 
-        val idReservaTextView = rowView.findViewById<TextView>(R.id.textViewIdReserva)
-        val idActividadTextView = rowView.findViewById<TextView>(R.id.textViewIdActividad)
-
-        "ID de Reserva: ${reservacion.id}".also { idReservaTextView.text = it }
-        "ID de Actividad: ${reservacion.idActividadTuristica}".also { idActividadTextView.text = it }
-
-        return rowView
+        return view
     }
 }

@@ -19,7 +19,8 @@ import kotlinx.coroutines.launch
 
 
 class ViewActividadesTuristicas : AppCompatActivity(),
-    ActividadesListAdapter.OnDeleteClickListener, ActividadesListAdapter.OnReserveClickListener {
+    ActividadesListAdapter.OnDeleteClickListener,
+    ActividadesListAdapter.OnReserveClickListener {
 
     private lateinit var listViewActividades: ListView
     private lateinit var btnBack: ImageButton
@@ -37,16 +38,15 @@ class ViewActividadesTuristicas : AppCompatActivity(),
             startActivity(intent)
         }
         val btnAgregar: ImageButton = findViewById(R.id.btnAgregar)
-        btnAgregar.setOnClickListener{
+        btnAgregar.setOnClickListener {
             val intent: Intent = Intent(this, ActividadesTuristicas::class.java)
             startActivity(intent)
 
         }
         val btnReservaciones: ImageButton = findViewById(R.id.btnReservaciones)
-        btnReservaciones.setOnClickListener{
-            val intent: Intent = Intent(this, DetallesReservaciones::class.java)
+        btnReservaciones.setOnClickListener {
+            val intent = Intent(this, DetallesReservaciones::class.java)
             startActivity(intent)
-
         }
 
         loadActividades()
@@ -58,7 +58,12 @@ class ViewActividadesTuristicas : AppCompatActivity(),
             val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
             actividadesList = dbHelper.getAllActividades()
 
-            val adapter = ActividadesListAdapter(this@ViewActividadesTuristicas, actividadesList, this@ViewActividadesTuristicas, this@ViewActividadesTuristicas)
+            val adapter = ActividadesListAdapter(
+                this@ViewActividadesTuristicas,
+                actividadesList,
+                this@ViewActividadesTuristicas,
+                this@ViewActividadesTuristicas
+            )
             listViewActividades.adapter = adapter
         }
     }
@@ -79,8 +84,39 @@ class ViewActividadesTuristicas : AppCompatActivity(),
     }
 
     override fun onReserveClick(actividad: ActividadTuristica) {
+        // Crear y mostrar un diálogo de confirmación
+        AlertDialog.Builder(this)
+            .setTitle("Confirmar Reservación")
+            .setMessage("¿Está seguro de que desea realizar la reservación para ${actividad.nombre}?")
+            .setPositiveButton("Sí") { dialog, which ->
+                // Si el usuario confirma, proceder con la reservación
+                realizarReservacion(actividad)
+            }
+            .setNegativeButton("No") { dialog, which ->
+                // Si el usuario cancela, cerrar el diálogo
+                dialog.dismiss()
+            }
+            .create()
+            .show()
+    }
+
+    private fun realizarReservacion(actividad: ActividadTuristica) {
         val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
-        val idReservacion = dbHelper.insertReserva(actividad.id.toLong()) // Insertar la reservación en la base de datos
+        val idReservacion: Long
+        try {
+            idReservacion =
+                dbHelper.insertReserva(actividad.id.toLong()) // Insertar la reservación en la base de datos
+            Log.d("Reservacion", "ID Actividad: ${actividad.id}, ID Reservacion: ${idReservacion}")
+        } catch (e: Exception) {
+            Log.e("Error", "Error al realizar la reservación: ${e.message}", e)
+            Toast.makeText(
+                this,
+                "Error al realizar la reservación: ${e.message}",
+                Toast.LENGTH_LONG
+            ).show()
+            return
+        }
+
         if (idReservacion != -1L) {
             Toast.makeText(this, "Reservación exitosa", Toast.LENGTH_SHORT).show()
             // Actualizar la lista de actividades después de hacer la reservación si es necesario
@@ -89,6 +125,4 @@ class ViewActividadesTuristicas : AppCompatActivity(),
             Toast.makeText(this, "Error al realizar la reservación", Toast.LENGTH_SHORT).show()
         }
     }
-
-
 }
