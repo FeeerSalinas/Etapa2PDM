@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@mipmap/bosque"
     tools:context=".DetallesReservaciones">
 
 
@@ -18,7 +18,8 @@
         android:layout_marginTop="3dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:contentDescription="Regresar"
-        android:src="@drawable/baseline_arrow_back_ios_24" />
+        android:src="@drawable/baseline_arrow_back_ios_24"
+        android:tint="#FFFFFF" />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"

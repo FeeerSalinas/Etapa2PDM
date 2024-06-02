@@ -197,6 +197,23 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return result
     }
+    fun getActividadById(actividadId: Int): ActividadTuristica? {
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_ACTIVIDADES_NAME WHERE $ACTIVIDADES_ID_KEY = ?", arrayOf(actividadId.toString()))
+        var actividad: ActividadTuristica? = null
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(ACTIVIDADES_ID_KEY))
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow(ACTIVIDADES_NOMBRE))
+            val descripcion = cursor.getString(cursor.getColumnIndexOrThrow(ACTIVIDADES_DESCRIPCION))
+            val imagen = cursor.getString(cursor.getColumnIndexOrThrow(ACTIVIDADES_IMAGEN))
+            val fecha = cursor.getString(cursor.getColumnIndexOrThrow(ACTIVIDADES_FECHA))
+            val costo = cursor.getDouble(cursor.getColumnIndexOrThrow(ACTIVIDADES_COSTO))
+            val idDestinoTuristico = cursor.getInt(cursor.getColumnIndexOrThrow(ACTIVIDADES_DESTINO_ID_KEY))
+            actividad = ActividadTuristica(id, nombre, descripcion, imagen, fecha, costo, idDestinoTuristico)
+        }
+        cursor.close()
+        return actividad
+    }
 
 
 

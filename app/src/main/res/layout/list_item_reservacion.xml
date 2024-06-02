@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="16dp">
 
     <TextView
-        android:id="@+id/textViewReservacion"
+        android:id="@+id/textViewReservacionId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Reservación"
+        android:text="ID Reservación"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewActividadNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre Actividad"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewActividadFecha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha Actividad"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textViewActividadCosto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Costo Actividad"
         android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnCancelarReservacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cancelar Reservación" />
+        android:backgroundTint="#E4B629"
+        android:text="Cancelar Reservación"
+        app:icon="@drawable/baseline_cancel_24" />
 
 </LinearLayout>

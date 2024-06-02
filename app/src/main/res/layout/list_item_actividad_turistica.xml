@@ -49,6 +49,15 @@
         android:orientation="horizontal"
         android:gravity="center">
 
+        <!--Button
+            android:id="@+id/btnReservarActividad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@mipmap/garrapata"
+            android:backgroundTint="#18AE1E"
+            android:text="Reservar" /-->
+
+
         <ImageButton
             android:id="@+id/btnEliminarActividad"
             android:layout_width="50dp"
@@ -66,6 +75,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="-11dp"
             android:background="#00FFFFFF"
+            android:text="Reservar"
             android:src="@mipmap/garrapata"
             app:tint="#06AC0D" />
 
@@ -74,7 +84,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentEnd="true"
-            android:layout_marginEnd="-150dp"
+            android:layout_marginEnd="-100dp"
             android:background="#00FFFFFF"
             android:src="@mipmap/megusta"
             app:tint="#888569" />
