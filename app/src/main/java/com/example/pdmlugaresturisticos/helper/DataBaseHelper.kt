@@ -273,6 +273,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         db.close()
         return result
     }
+
     fun getActividadById(actividadId: Int): ActividadTuristica? {
         val db = this.readableDatabase
         val cursor = db.rawQuery("SELECT * FROM $TABLE_ACTIVIDADES_NAME WHERE $ACTIVIDADES_ID_KEY = ?", arrayOf(actividadId.toString()))
