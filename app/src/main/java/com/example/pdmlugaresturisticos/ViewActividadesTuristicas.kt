@@ -1,5 +1,6 @@
 package com.example.pdmlugaresturisticos
 
+import ActividadesListAdapter
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -10,7 +11,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.pdmlugaresturisticos.adapter.ActividadesListAdapter
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.Usuario

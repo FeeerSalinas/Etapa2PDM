@@ -1,14 +1,12 @@
-package com.example.pdmlugaresturisticos.adapter
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.Button
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
 import com.example.pdmlugaresturisticos.R
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.squareup.picasso.Picasso
@@ -58,22 +56,10 @@ class ActividadesListAdapter(
             onDeleteClickListener.onDeleteClick(actividad)
         }
 
-      /*  val btnReservarActividad = rowView.findViewById<ImageButton>(R.id.btnReservarActividad)
+        // Cambiar ImageButton a Button
+        val btnReservarActividad = rowView.findViewById<Button>(R.id.btnReservarActividad)
         btnReservarActividad.setOnClickListener {
-            val alertDialog = AlertDialog.Builder(context)
-                .setTitle("Reservar Actividad Turística")
-                .setMessage("¿Deseas completar la reserva de esta actividad turística?")
-                .setPositiveButton("Sí") { dialog, which ->
-                    onReserveClickListener.onReserveClick(actividad)
-                }
-                .setNegativeButton("No", null)
-                .create()
-
-            alertDialog.show()
-        }*/
-        val btnReservarActividad = rowView.findViewById<ImageButton>(R.id.btnReservarActividad)
-        btnReservarActividad.setOnClickListener {
-            onReserveClickListener.onReserveClick(actividad) // Llamar al método de reserva
+            onReserveClickListener.onReserveClick(actividad)
         }
 
         return rowView
