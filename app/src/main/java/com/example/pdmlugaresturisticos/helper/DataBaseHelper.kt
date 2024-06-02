@@ -8,9 +8,8 @@ import android.util.Log
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
 import com.example.pdmlugaresturisticos.models.Reservacion
-import com.example.pdmlugaresturisticos.models.Usuario
 
-class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
+class DataBaseHelper (context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
         private const val DATABASE_VERSION = 1
@@ -42,7 +41,6 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
     }
 
     override fun onCreate(db: SQLiteDatabase?) {
-
         val CREATE_DESTINOS_TABLE = "CREATE TABLE $TABLE_DESTINOS_NAME (" +
                 "$DESTINOS_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$DESTINOS_NOMBRE TEXT, " +
@@ -65,12 +63,10 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$RESERVACIONES_ACTIVIDAD_ID INTEGER, " +
                 "FOREIGN KEY($RESERVACIONES_ACTIVIDAD_ID) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
 
+
         db?.execSQL(CREATE_DESTINOS_TABLE)
         db?.execSQL(CREATE_ACTIVIDADES_TABLE)
         db?.execSQL(CREATE_RESERVACIONES_TABLE)
-
-
-
     }
 
     fun getAllDestinos(): List<DestinoTuristico> {
@@ -137,6 +133,60 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         return result
     }
 
+    //metodos de fernando
+
+    //metodo para actualizar sitios
+    fun updateSitio(id: Int, nombre: String, descripcion: String, imagen: String){
+        val values = ContentValues()
+        values.put(DESTINOS_NOMBRE, nombre)
+        values.put(DESTINOS_DESCRIPCION, descripcion)
+        values.put(DESTINOS_IMAGEN, imagen)
+        val db = this.writableDatabase
+        db.update(
+            TABLE_DESTINOS_NAME,
+            values,
+            "$DESTINOS_ID_KEY = ?",
+            arrayOf(id.toString())
+        )
+
+    }
+
+    //metodos para devolver los sitios
+
+    fun getAllSitios(): ArrayList<DestinoTuristico>{
+        val listSitios = ArrayList<DestinoTuristico>()
+        val selectQuery = "SELECT $DESTINOS_ID_KEY, $DESTINOS_NOMBRE, $DESTINOS_DESCRIPCION, $DESTINOS_IMAGEN FROM $TABLE_DESTINOS_NAME"
+
+        val db = this.readableDatabase
+        val cursor = db.rawQuery(selectQuery, null)
+
+        while(cursor.moveToNext()){
+            val IdSitio = cursor.getInt(cursor.getColumnIndexOrThrow(DESTINOS_ID_KEY))
+            val NombreSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_NOMBRE))
+            val DescripcionSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_DESCRIPCION))
+            val ImagenSitio = cursor.getString(cursor.getColumnIndexOrThrow(DESTINOS_IMAGEN))
+
+            //GUARDANDO
+            val SitioInfo = DestinoTuristico(IdSitio, NombreSitio, DescripcionSitio, ImagenSitio)
+            listSitios.add(SitioInfo)
+        }
+        cursor.close()
+        db.close()
+        Log.i("DATA", "EL GETALL JALA")
+        return listSitios
+
+
+    }
+
+    //Funcion para eliminar
+    fun deleteSitios(id: String){
+        val db = writableDatabase
+        db.delete(
+            TABLE_DESTINOS_NAME,
+            "$DESTINOS_ID_KEY = ?",
+            arrayOf(id)
+        )
+    }
     fun getAllActividades(): List<ActividadTuristica> {
         val actividadesList = mutableListOf<ActividadTuristica>()
         val db = this.readableDatabase
@@ -214,7 +264,6 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return actividad
     }
-
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

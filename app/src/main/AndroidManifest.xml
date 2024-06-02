@@ -16,6 +16,12 @@
             android:name=".ViewActividadesTuristicas"
             android:exported="false" />
         <activity
+            android:name=".agregarSitio"
+            android:exported="false" />
+        <activity
+            android:name=".mostrarSitiosTuristicos"
+            android:exported="false" />
+        <activity
             android:name=".Registro"
             android:exported="false" />
         <activity

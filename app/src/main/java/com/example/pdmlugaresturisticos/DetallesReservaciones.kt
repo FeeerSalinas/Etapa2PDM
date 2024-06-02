@@ -25,7 +25,7 @@ class DetallesReservaciones : AppCompatActivity(), ReservacionesListAdapter.OnCa
         btnBack = findViewById(R.id.btnBack)
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, PaginaInicio::class.java)
+            val intent = Intent(this, ViewActividadesTuristicas::class.java)
             startActivity(intent)
         }
 
