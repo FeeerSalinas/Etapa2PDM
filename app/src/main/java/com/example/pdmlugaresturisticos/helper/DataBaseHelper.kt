@@ -191,6 +191,12 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return reservacionesList
     }
+    fun deleteReservacion(reservacionId: Long): Int {
+        val db = writableDatabase
+        val result = db.delete(TABLE_RESERVACIONES_NAME, "$RESERVACIONES_ID_KEY=?", arrayOf(reservacionId.toString()))
+        db.close()
+        return result
+    }
 
 
 
