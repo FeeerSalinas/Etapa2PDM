@@ -72,6 +72,25 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
+        /*
+        // Crear dos destinos turísticos de ejemplo
+        val destino1 = DestinoTuristico(
+            nombre = "Playa Hermosa",
+            descripcion = "Una playa con aguas cristalinas y arena blanca.",
+            imagen = "http://example.com/playa_hermosa.jpg"
+        )
+
+        val destino2 = DestinoTuristico(
+            nombre = "Montaña Majestuosa",
+            descripcion = "Una montaña con vistas espectaculares y rutas de senderismo.",
+            imagen = "http://example.com/montana_majestuosa.jpg"
+        )
+
+        // Insertar los destinos en la base de datos
+        dbHelper.insertDestinoTuristico(destino1)
+        dbHelper.insertDestinoTuristico(destino2)
+        */
+
     }
     private fun togglePasswordVisibility() {
         if (txtConstraseña.transformationMethod == PasswordTransformationMethod.getInstance()) {
