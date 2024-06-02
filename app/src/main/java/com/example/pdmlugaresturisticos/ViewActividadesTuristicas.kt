@@ -1,6 +1,7 @@
 package com.example.pdmlugaresturisticos
 
 import ActividadesListAdapter
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -89,11 +90,9 @@ class ViewActividadesTuristicas : AppCompatActivity(),
             .setTitle("Confirmar Reservación")
             .setMessage("¿Está seguro de que desea realizar la reservación para ${actividad.nombre}?")
             .setPositiveButton("Sí") { dialog, which ->
-                // Si el usuario confirma, proceder con la reservación
                 realizarReservacion(actividad)
             }
             .setNegativeButton("No") { dialog, which ->
-                // Si el usuario cancela, cerrar el diálogo
                 dialog.dismiss()
             }
             .create()
@@ -102,24 +101,26 @@ class ViewActividadesTuristicas : AppCompatActivity(),
 
     private fun realizarReservacion(actividad: ActividadTuristica) {
         val dbHelper = DataBaseHelper(this@ViewActividadesTuristicas)
+        val sharedPref = getSharedPreferences("miapp", Context.MODE_PRIVATE)
+        val idUsuario = sharedPref.getInt("idUsuario", -1)
+
+        if (idUsuario == -1) {
+            Toast.makeText(this, "Error: Usuario no autenticado", Toast.LENGTH_LONG).show()
+            return
+        }
+
         val idReservacion: Long
         try {
-            idReservacion =
-                dbHelper.insertReserva(actividad.id.toLong()) // Insertar la reservación en la base de datos
-            Log.d("Reservacion", "ID Actividad: ${actividad.id}, ID Reservacion: ${idReservacion}")
+            idReservacion = dbHelper.insertReserva(idUsuario, actividad.id.toLong())
+            Log.d("Reservacion", "ID Usuario: $idUsuario, ID Actividad: ${actividad.id}, ID Reservacion: $idReservacion")
         } catch (e: Exception) {
             Log.e("Error", "Error al realizar la reservación: ${e.message}", e)
-            Toast.makeText(
-                this,
-                "Error al realizar la reservación: ${e.message}",
-                Toast.LENGTH_LONG
-            ).show()
+            Toast.makeText(this, "Error al realizar la reservación: ${e.message}", Toast.LENGTH_LONG).show()
             return
         }
 
         if (idReservacion != -1L) {
             Toast.makeText(this, "Reservación exitosa", Toast.LENGTH_SHORT).show()
-            // Actualizar la lista de actividades después de hacer la reservación si es necesario
             loadActividades()
         } else {
             Toast.makeText(this, "Error al realizar la reservación", Toast.LENGTH_SHORT).show()

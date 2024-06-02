@@ -1,5 +1,6 @@
 package com.example.pdmlugaresturisticos
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageButton
@@ -25,7 +26,7 @@ class DetallesReservaciones : AppCompatActivity(), ReservacionesListAdapter.OnCa
         btnBack = findViewById(R.id.btnBack)
 
         btnBack.setOnClickListener {
-            val intent = Intent(this, PaginaInicio::class.java)
+            val intent = Intent(this, ViewActividadesTuristicas::class.java)
             startActivity(intent)
         }
 
@@ -34,11 +35,25 @@ class DetallesReservaciones : AppCompatActivity(), ReservacionesListAdapter.OnCa
 
     private fun loadReservaciones() {
         val dbHelper = DataBaseHelper(this)
+        val idUsuario = obtenerIdUsuarioSesion() // Método para obtener el ID del usuario que inició sesión
+
+        // Obtener todas las reservaciones desde la base de datos
         val reservacionesList = dbHelper.getAllReservaciones()
 
-        val adapter = ReservacionesListAdapter(this, reservacionesList, this)
+        // Filtrar las reservaciones para que solo contengan las del usuario actual
+        val reservacionesUsuario = reservacionesList.filter { it.idUsuario == idUsuario }
+
+        // Crear y establecer el adaptador con la lista filtrada de reservaciones
+        val adapter = ReservacionesListAdapter(this, reservacionesUsuario, this)
         listViewReservaciones.adapter = adapter
     }
+
+    private fun obtenerIdUsuarioSesion(): Int {
+        // Obtener el ID de usuario de SharedPreferences u otro mecanismo de sesión
+        val sharedPref = getSharedPreferences("miapp", Context.MODE_PRIVATE)
+        return sharedPref.getInt("idUsuario", -1) // -1 si no se encuentra el ID de usuario
+    }
+
 
     override fun onCancelClick(reservacion: Reservacion) {
         val alertDialog = AlertDialog.Builder(this)
