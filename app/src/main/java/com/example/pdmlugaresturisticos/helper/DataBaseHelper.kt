@@ -78,7 +78,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
                 "$RESERVACIONES_ID_KEY INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$RESERVACIONES_USUARIO_ID INTEGER, " +
                 "$RESERVACIONES_ACTIVIDAD_ID INTEGER, " +
-                "FOREIGN KEY($RESERVACIONES_ACTIVIDAD_ID) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY))"
+                "FOREIGN KEY($RESERVACIONES_ACTIVIDAD_ID) REFERENCES $TABLE_ACTIVIDADES_NAME($ACTIVIDADES_ID_KEY), " +
+                "FOREIGN KEY($RESERVACIONES_USUARIO_ID) REFERENCES $TABLE_USUARIO($COLUMN_ID_USUARIO))"
         // Creación de tabla rol
         val CREATE_TABLE_ROL = "CREATE TABLE $TABLE_ROL (" +
                 "$COLUMN_ID_ROL INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -239,24 +240,16 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         cursor.close()
         return actividadesList
     }
-    fun insertReserva(idActividad: Long): Long {
+    fun insertReserva(idUsuario: Int, idActividadTuristica: Long): Long {
         val db = this.writableDatabase
-        val idUsuario = 1 // Definir el idUsuario como constante 1
         val values = ContentValues().apply {
-            put(RESERVACIONES_USUARIO_ID, idUsuario)
-            put(RESERVACIONES_ACTIVIDAD_ID, idActividad)
+            put("idUsuario", idUsuario)
+            put("idActividadTuristica", idActividadTuristica)
+            // Agrega otros campos necesarios
         }
-        return try {
-            val result = db.insert(TABLE_RESERVACIONES_NAME, null, values)
-            Log.d("DB Insert", "Reserva insertada con ID: $result")
-            result
-        } catch (e: Exception) {
-            Log.e("DB Insert Error", "Error al insertar la reserva: ${e.message}", e)
-            -1L
-        } finally {
-            db.close()
-        }
+        return db.insert("Reservaciones", null, values)
     }
+
 
 
     fun getAllReservaciones(): List<Reservacion> {

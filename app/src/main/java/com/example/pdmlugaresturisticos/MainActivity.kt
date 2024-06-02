@@ -72,6 +72,7 @@ class MainActivity : AppCompatActivity() {
             val intent: Intent = Intent(this, Registro::class.java)
             startActivity(intent)
         }
+
         /*
         // Crear dos destinos turísticos de ejemplo
         val destino1 = DestinoTuristico(
