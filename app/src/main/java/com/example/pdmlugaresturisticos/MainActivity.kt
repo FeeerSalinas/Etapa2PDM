@@ -3,9 +3,11 @@ package com.example.pdmlugaresturisticos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
+import com.example.pdmlugaresturisticos.models.Usuario
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,7 +33,7 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
+        /*
         // Crear dos destinos turísticos de ejemplo
         val destino1 = DestinoTuristico(
             nombre = "Playa Hermosa",
@@ -48,6 +50,9 @@ class MainActivity : AppCompatActivity() {
         // Insertar los destinos en la base de datos
         dbHelper.insertDestinoTuristico(destino1)
         dbHelper.insertDestinoTuristico(destino2)
+        */
+
+
 
 
 

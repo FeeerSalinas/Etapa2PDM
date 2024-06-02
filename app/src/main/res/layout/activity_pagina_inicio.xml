@@ -7,6 +7,7 @@
     android:background="#FFFFFF"
     tools:context=".PaginaInicio">
 
+    <!-- Otras vistas -->
 
     <ImageButton
         android:id="@+id/btnHome"
@@ -91,67 +92,32 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.262" />
 
-    <EditText
-        android:id="@+id/txtBuscador"
-        android:layout_width="340dp"
-        android:layout_height="60dp"
-        android:ems="10"
-        android:inputType="text"
-        android:text=""
-        android:hint="Descrubrir..."
-        android:fontFamily="sans-serif-condensed-medium"
-        android:textSize="20sp"
-        android:textAlignment="center"
-        android:background="@drawable/bordo_redondeado"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.347" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="47dp"
-        android:layout_height="33dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.146"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35"
-        app:srcCompat="@drawable/search" />
-
-    <TextView
-        android:id="@+id/txtDescripcion"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:background="@drawable/bordo_redondeado"
-        android:fontFamily="sans-serif-condensed-medium"
-        android:gravity="center|bottom"
-        android:text="Lago de coatepeque"
-        android:textSize="25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.447"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.716" />
-
     <ImageButton
-        android:id="@+id/btnCoatepeque"
-        android:layout_width="196dp"
-        android:layout_height="147dp"
-        android:background="@drawable/fotos_circulares"
-        android:clipToOutline="true"
-        android:scaleType="centerCrop"
-        android:contentDescription="Lago de coatapeque"
+        android:id="@+id/btnAnadirSitio"
+        android:layout_width="57dp"
+        android:layout_height="59dp"
+        android:background="#ffff"
+        android:contentDescription="TODO"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintHorizontal_bias="0.926"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541"
-        app:srcCompat="@drawable/lagocoatepeque" />
+        app:layout_constraintVertical_bias="0.858"
+        app:srcCompat="@drawable/edit_icon" />
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vpSitios"
+        android:layout_width="0dp"
+        android:layout_height="320dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/btnHome"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5"
+        app:layout_constraintVertical_bias="0.242" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
