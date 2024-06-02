@@ -13,7 +13,6 @@ import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import com.example.pdmlugaresturisticos.databinding.ActivityMainBinding
 import com.example.pdmlugaresturisticos.databinding.ActivityMostrarSitiosTuristicosBinding
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
