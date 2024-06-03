@@ -89,24 +89,62 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        /*
-        // Crear dos destinos turísticos de ejemplo
+
         val destino1 = DestinoTuristico(
-            nombre = "Playa Hermosa",
-            descripcion = "Una playa con aguas cristalinas y arena blanca.",
-            imagen = "http://example.com/playa_hermosa.jpg"
+            nombre = "Lago de Coatepeque",
+            descripcion = " Un hermoso lago rodeado de volcanes y pueblos pintorescos.",
+            imagen = "https://olaspermanentes.surf/wp-content/uploads/2023/08/Lago-de-Coatepeque-1.jpg",
         )
-
         val destino2 = DestinoTuristico(
-            nombre = "Montaña Majestuosa",
-            descripcion = "Una montaña con vistas espectaculares y rutas de senderismo.",
-            imagen = "http://example.com/montana_majestuosa.jpg"
+            nombre = "Playa El Tunco",
+            descripcion = " Una playa famosa entre surfistas con aguas cristalinas y olas perfectas.",
+            imagen = " https://ipanelsalvador.wordpress.com/wp-content/uploads/2012/09/eltiunco.jpg"
         )
 
-        // Insertar los destinos en la base de datos
+        val destino3 = DestinoTuristico(
+            nombre = " Ruta de las Flores",
+            descripcion = " Una ruta escénica que pasa por pintorescos pueblos, cafetales y cascadas.",
+            imagen = " https://diarioelsalvador.com/wp-content/uploads/2021/04/WhatsApp-Image-2021-04-02-at-10.51.23-AM-3.jpeg"
+        )
+
+        val destino4 = DestinoTuristico(
+            nombre = "Cerro Verde",
+            descripcion = "Un volcán inactivo con senderos para hacer senderismo y disfrutar de vistas panorámicas.",
+            imagen = " https://pateperro.app/wp-content/uploads/2022/02/puzzlefactory-768x539.jpg"
+        )
+
+        val destino5 = DestinoTuristico(
+            nombre = "Parque Nacional El Imposible",
+            descripcion = "Un área protegida con una gran diversidad de flora y fauna, perfecta para hacer senderismo.",
+            imagen = " https://elsalvador.travel/system/wp-content/uploads/2021/04/10012021-El-Imposible-APPEX-5.jpg"
+        )
+
+        val destino6 = DestinoTuristico(
+            nombre = "Puerta del Diablo",
+            descripcion = "Un mirador natural con impresionantes vistas del valle de San Salvador y sus alrededores.",
+            imagen = " https://elsalvadoresbello.com/wp-content/uploads/2019/01/Puerta-del-Diablo-El-Salvador-es-Bello-1275x850.jpg"
+        )
+        val destino7 = DestinoTuristico(
+            nombre = "Tazumal",
+            descripcion = "Un importante sitio arqueológico que muestra la historia de la civilización maya en la región.",
+            imagen = " https://www.cultura.gob.sv/wp-content/uploads/2023/05/TAZUMAL.jpg"
+        )
+
+        val destino8 = DestinoTuristico(
+            nombre = "El Boquerón",
+            descripcion = "Un cráter volcánico que alberga un bosque nuboso y ofrece vistas espectaculares.",
+            imagen = " https://d2t54f3e471ia1.cloudfront.net/ricardosiman/multimedia/galerias/fotos/1903684_514.jpg"
+        )
+// Insertar los destinos en la base de datos
         dbHelper.insertDestinoTuristico(destino1)
         dbHelper.insertDestinoTuristico(destino2)
-        */
+        dbHelper.insertDestinoTuristico(destino3)
+        dbHelper.insertDestinoTuristico(destino4)
+        dbHelper.insertDestinoTuristico(destino5)
+        dbHelper.insertDestinoTuristico(destino6)
+        dbHelper.insertDestinoTuristico(destino7)
+        dbHelper.insertDestinoTuristico(destino8)
+
 
     }
     private fun togglePasswordVisibility() {
