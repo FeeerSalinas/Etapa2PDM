@@ -9,6 +9,7 @@ import android.util.Log
 import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
 import com.example.pdmlugaresturisticos.models.Reservacion
+import com.example.pdmlugaresturisticos.models.Usuario
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
@@ -367,6 +368,27 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return db?.insert(TABLE_ROL, null, values)
     }
+    fun getUsuarioById(idUsuario: Int): Usuario? {
+        val db = this.readableDatabase
+        var usuario: Usuario? = null
+        val query = "SELECT * FROM $TABLE_USUARIO WHERE $COLUMN_ID_USUARIO = ?"
+        val cursor = db.rawQuery(query, arrayOf(idUsuario.toString()))
+
+        if (cursor.moveToFirst()) {
+            val id = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_USUARIO))
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_NOMBRE_USUARIO))
+            val contrasena = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CONTRASENA))
+            val correo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMN_CORREO))
+            val rolId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMN_ID_ROL_FK))
+            usuario = Usuario(id, nombre, contrasena, correo, rolId)
+        }
+
+        cursor.close()
+        return usuario
+    }
+
+
+
 
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {

@@ -65,6 +65,22 @@ class MainActivity : AppCompatActivity() {
                 txtNombreUsuario.error = "Usuario o contraseña incorrectos"
                 txtContrasena.error = "Usuario o contraseña incorrectos"
             }
+
+
+            // Obtener el nombre de usuario del SharedPreferences
+            val nombreUsuario = username
+
+            // Obtener el correo del SharedPreferences
+            val correoUsuario = "correo@example.com" // Debes obtener el correo del usuario de alguna fuente, como la base de datos
+
+            // Pasar el nombre de usuario y correo a la actividad PerfilActivity
+            val intent = Intent(this, Perfil::class.java)
+            intent.putExtra("nombreUsuario", nombreUsuario)
+            intent.putExtra("correoUsuario", correoUsuario)
+            startActivity(intent)
+            finish()
+
+
         }
         val btnRegistrarseInicio: Button = findViewById(R.id.btnRegistrarseInicio)
         btnRegistrarseInicio.setOnClickListener {
