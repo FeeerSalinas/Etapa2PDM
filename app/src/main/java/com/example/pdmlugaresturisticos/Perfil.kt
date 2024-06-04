@@ -1,6 +1,8 @@
+
 package com.example.pdmlugaresturisticos
 
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
@@ -10,6 +12,7 @@ import com.example.pdmlugaresturisticos.models.Usuario
 
 class Perfil : AppCompatActivity() {
     private lateinit var dbHelper: DataBaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
     private lateinit var txtEditName: TextView
     private lateinit var txtEditCorreo: TextView
 
@@ -18,6 +21,7 @@ class Perfil : AppCompatActivity() {
         setContentView(R.layout.activity_perfil)
 
         dbHelper = DataBaseHelper(this)
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
         txtEditName = findViewById(R.id.txtEditName)
         txtEditCorreo = findViewById(R.id.txtEditCorreo)
 
@@ -31,29 +35,23 @@ class Perfil : AppCompatActivity() {
         }
 
         val btnHomePerfil: ImageButton = findViewById(R.id.btnHomePerfil)
-        btnHomePerfil.setOnClickListener{
+        btnHomePerfil.setOnClickListener {
             val intent: Intent = Intent(this, PaginaInicio::class.java)
             startActivity(intent)
         }
-        if (idUsuario != -1) {
-            val usuario = dbHelper.getUsuarioById(idUsuario)
-            if (usuario != null) {
-                mostrarPerfilUsuario(usuario)
-            }
-        }
+
         // Obtener los datos del Intent
         val nombreUsuario = intent.getStringExtra("nombreUsuario")
-        val correoUsuario = intent.getStringExtra("correoUsuario")
+        // Recuperar correo desde SharedPreferences
+        val correoUsuario = sharedPreferences.getString("correo", "Correo no disponible")
 
         // Establecer los datos en las cajas de texto
-        txtEditName.setText(nombreUsuario)
-        txtEditCorreo.setText(correoUsuario)
-
+        txtEditName.text = nombreUsuario
+        txtEditCorreo.text = correoUsuario
     }
 
     private fun mostrarPerfilUsuario(usuario: Usuario) {
         txtEditName.text = usuario.nombre
         txtEditCorreo.text = usuario.correo
     }
-
 }

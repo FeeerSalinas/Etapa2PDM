@@ -1,7 +1,9 @@
+
 package com.example.pdmlugaresturisticos
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -11,11 +13,14 @@ import com.example.pdmlugaresturisticos.helper.DataBaseHelper
 
 class Registro : AppCompatActivity() {
     private lateinit var dbHelper: DataBaseHelper
+    private lateinit var sharedPreferences: SharedPreferences
+
     @SuppressLint("CutPasteId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
         dbHelper = DataBaseHelper(this)
+        sharedPreferences = getSharedPreferences("UserPrefs", MODE_PRIVATE)
 
         // Obtener referencias a los elementos de la interfaz de usuario
         val btnRegistrarseRegistro: Button = findViewById(R.id.btnRegistrarseRegistro)
@@ -50,6 +55,12 @@ class Registro : AppCompatActivity() {
             // Insertar usuario en la base de datos
             val idUsuario = dbHelper.insertUsuario(usuario, contrasena, correo, rolId)
             if (idUsuario != -1L) {
+                // Guardar nombre y correo en SharedPreferences
+                val editor = sharedPreferences.edit()
+                editor.putString("nombre", nombre)
+                editor.putString("correo", correo)
+                editor.apply()
+
                 Toast.makeText(applicationContext, "Usuario registrado correctamente", Toast.LENGTH_SHORT).show()
                 // Ir a la pantalla de inicio de sesión
                 val intent = Intent(this, MainActivity::class.java)
@@ -66,6 +77,5 @@ class Registro : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-
     }
 }
