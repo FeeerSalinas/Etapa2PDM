@@ -23,19 +23,20 @@
 
     <EditText
         android:id="@+id/txtNombreRegistro"
-        android:layout_width="320dp"
-        android:layout_height="50dp"
+        android:layout_width="57dp"
+        android:layout_height="22dp"
         android:background="@drawable/bordo_redondeado"
         android:ems="10"
         android:hint="Nombre"
         android:inputType="text"
         android:textColorHint="#6166E1"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.37" />
+        app:layout_constraintVertical_bias="0.004" />
 
     <EditText
         android:id="@+id/txtUsuarioRegistro"
@@ -51,7 +52,7 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.478" />
+        app:layout_constraintVertical_bias="0.381" />
 
     <EditText
         android:id="@+id/txtCorreoRegistro"
@@ -67,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.59" />
+        app:layout_constraintVertical_bias="0.522" />
 
     <EditText
         android:id="@+id/txtContraRegistro"
@@ -83,7 +84,7 @@
         app:layout_constraintHorizontal_bias="0.505"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.693" />
+        app:layout_constraintVertical_bias="0.654" />
 
     <Button
         android:id="@+id/btnRegistrarseRegistro"
