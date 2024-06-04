@@ -101,6 +101,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
 
         insertRol(db, "admin")
         insertRol(db, "usuario")
+        insertAdmin(db,"admin","1234","admin@admin.com",1)
     }
 
     fun getAllDestinos(): List<DestinoTuristico> {
@@ -367,7 +368,15 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         }
         return db?.insert(TABLE_ROL, null, values)
     }
-
+    private fun insertAdmin(db: SQLiteDatabase?, nombreUsuario: String, contrasena: String, correo: String, idRol: Long): Long? {
+        val values = ContentValues().apply {
+            put(COLUMN_NOMBRE_USUARIO, nombreUsuario)
+            put(COLUMN_CONTRASENA, encryptPassword(contrasena))
+            put(COLUMN_CORREO, correo)
+            put(COLUMN_ID_ROL_FK, idRol)
+        }
+        return db?.insert(TABLE_USUARIO, null, values)
+    }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.execSQL("DROP TABLE IF EXISTS $TABLE_DESTINOS_NAME")

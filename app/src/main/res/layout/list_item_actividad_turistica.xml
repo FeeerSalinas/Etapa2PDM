@@ -62,10 +62,11 @@
             android:id="@+id/btnEliminarActividad"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:background="#00FFFFFF"
-            android:src="@mipmap/borrar"
             android:layout_alignParentEnd="true"
             android:layout_marginEnd="-11dp"
+            android:background="#00FFFFFF"
+            android:src="@mipmap/borrar"
+            android:visibility="gone"
             app:tint="#AE0C0C" />
 
         <!--ImageButton
