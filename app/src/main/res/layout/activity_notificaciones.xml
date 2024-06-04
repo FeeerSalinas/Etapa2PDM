@@ -14,7 +14,8 @@
         android:layout_height="673dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/fondo_notificaciones"
-        tools:layout_editor_absoluteX="-5dp" />
+        tools:layout_editor_absoluteX="-5dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
