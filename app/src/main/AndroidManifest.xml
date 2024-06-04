@@ -42,6 +42,7 @@
         <activity
             android:name=".ActividadesTuristicas"
             android:exported="false" />
+        <activity android:name=".adapter.NotificacionesAdapter"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">

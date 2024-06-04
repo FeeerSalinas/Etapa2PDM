@@ -7,6 +7,13 @@
     android:padding="16dp">
 
     <TextView
+        android:id="@+id/txtMOSTRAR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Usted ha realizado una reservación"
+        android:textSize="16sp" />
+
+    <TextView
         android:id="@+id/textViewReservacionId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

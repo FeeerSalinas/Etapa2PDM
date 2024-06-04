@@ -1,6 +1,7 @@
 package com.example.pdmlugaresturisticos
 
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.example.pdmlugaresturisticos.adapter.NotificacionesAdapter
 import kotlin.math.abs
 
 class PaginaInicio : AppCompatActivity() {
@@ -59,6 +61,12 @@ class PaginaInicio : AppCompatActivity() {
 
         }
 
+        val btnNotificaciones: ImageButton = findViewById(R.id.btnNotificacion)
+        btnNotificaciones.setOnClickListener {
+            val intent = Intent(this, Notificaciones::class.java)
+            startActivity(intent)
+        }
+
 
 
     }
@@ -98,6 +106,14 @@ class PaginaInicio : AppCompatActivity() {
         imageList.add(R.drawable.volcan_de_izalco)
         imageList.add(R.drawable.lagocoatepeque)
         imageList.add(R.drawable.puerta_del_diablo)
+        imageList.add(R.drawable.cerro_verde)
+        imageList.add(R.drawable.playa_el_tunco)
+        imageList.add(R.drawable.surf_city)
+        imageList.add(R.drawable.el_pital)
+        imageList.add(R.drawable.el_majahual)
+        imageList.add(R.drawable.playa_los_cobanos)
+        imageList.add(R.drawable.atecozol)
+        imageList.add(R.drawable.jardin_botanico)
 
         adapter = imageAdapter(imageList, viewPager2)
 
