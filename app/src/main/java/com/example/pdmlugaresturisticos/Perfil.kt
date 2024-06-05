@@ -35,6 +35,19 @@ class Perfil : AppCompatActivity() {
             val intent: Intent = Intent(this, PaginaInicio::class.java)
             startActivity(intent)
         }
+        val btnDestacados: ImageButton = findViewById(R.id.btnDestacados)
+        btnDestacados.setOnClickListener{
+
+            val intent: Intent = Intent(this, ViewActividadesTuristicas::class.java)
+            startActivity(intent)
+
+        }
+
+        val btnNotificaciones: ImageButton = findViewById(R.id.btnNotificacion)
+        btnNotificaciones.setOnClickListener {
+            val intent = Intent(this, Notificaciones::class.java)
+            startActivity(intent)
+        }
         if (idUsuario != -1) {
             val usuario = dbHelper.getUsuarioById(idUsuario)
             if (usuario != null) {

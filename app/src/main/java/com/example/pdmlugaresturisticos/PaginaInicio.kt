@@ -59,7 +59,11 @@ class PaginaInicio : AppCompatActivity() {
 
         }
 
-
+        val btnNotificaciones: ImageButton = findViewById(R.id.btnNotificacion)
+        btnNotificaciones.setOnClickListener {
+            val intent = Intent(this, Notificaciones::class.java)
+            startActivity(intent)
+        }
 
     }
 
@@ -98,6 +102,14 @@ class PaginaInicio : AppCompatActivity() {
         imageList.add(R.drawable.volcan_de_izalco)
         imageList.add(R.drawable.lagocoatepeque)
         imageList.add(R.drawable.puerta_del_diablo)
+        imageList.add(R.drawable.cerro_verde)
+        imageList.add(R.drawable.playa_el_tunco)
+        imageList.add(R.drawable.surf_city)
+        imageList.add(R.drawable.el_pital)
+        imageList.add(R.drawable.el_majahual)
+        imageList.add(R.drawable.playa_los_cobanos)
+        imageList.add(R.drawable.atecozol)
+
 
         adapter = imageAdapter(imageList, viewPager2)
 

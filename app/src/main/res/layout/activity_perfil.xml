@@ -21,7 +21,7 @@
         tools:layout_editor_absoluteX="0dp" />
 
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/btnDestacados"
         android:layout_width="197dp"
         android:layout_height="150dp"
         android:background="@drawable/fotos_circulares"
@@ -72,7 +72,7 @@
         android:background="@drawable/bordo_redondeado"
         android:fontFamily="sans-serif-condensed-medium"
         android:gravity="center"
-        android:text="MichiHernan@catmail.miaw"
+        android:text="example@catmail.miaw"
         android:textColor="#000000"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -126,7 +126,7 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="100dp"
-        android:text="Soy un gato que desea hacer en las arenas de El Salvador"
+        android:text="Apasionado por descubrir nuevos horizontes y sumergirme en culturas diversas. Siempre en busca de aventuras emocionantes y experiencias enriquecedoras. Explorar el mundo es mi pasión y mi mayor inspiración."
         android:fontFamily="sans-serif-condensed-medium"
         android:textSize="15sp"
         android:background="@drawable/bordo_redondeado"
@@ -222,7 +222,7 @@
         app:srcCompat="@drawable/home" />
 
     <ImageButton
-        android:id="@+id/btnNotificacionPerfil"
+        android:id="@+id/btnNotificacion"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:background="#FFFFFF"
