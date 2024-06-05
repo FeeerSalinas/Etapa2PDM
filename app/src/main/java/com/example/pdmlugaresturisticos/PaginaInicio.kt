@@ -58,6 +58,12 @@ class PaginaInicio : AppCompatActivity() {
             startActivity(intent)
 
         }
+        val btnInfo: ImageButton = findViewById(R.id.btnInfo)
+        btnInfo.setOnClickListener {
+
+            val intent: Intent = Intent(this, Activity_contacts::class.java)
+            startActivity(intent)
+        }
 
         val btnNotificaciones: ImageButton = findViewById(R.id.btnNotificacion)
         btnNotificaciones.setOnClickListener {
