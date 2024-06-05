@@ -12,6 +12,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import com.example.pdmlugaresturisticos.helper.DataBaseHelper
+import com.example.pdmlugaresturisticos.models.ActividadTuristica
 import com.example.pdmlugaresturisticos.models.DestinoTuristico
 import com.example.pdmlugaresturisticos.models.Usuario
 
@@ -144,6 +145,99 @@ class MainActivity : AppCompatActivity() {
         dbHelper.insertDestinoTuristico(destino6)
         dbHelper.insertDestinoTuristico(destino7)
         dbHelper.insertDestinoTuristico(destino8)
+
+        val actividad1 = ActividadTuristica(
+            nombre = "Escalada en Puerta del Diablo",
+            descripcion = "Disfruta de una escalada desafiante con vistas impresionantes.",
+            imagen = "https://istu.gob.sv/wp-content/uploads/2024/02/WhatsApp-Image-2024-02-08-at-10.46.10-AM.jpeg",
+            fecha = "2024-06-01",
+            costo = 20.00,
+            idDestinoTuristico = 1
+        )
+        dbHelper.insertActividadTuristica(actividad1)
+
+        val actividad2 = ActividadTuristica(
+            nombre = "Tour guiado en Tazumal",
+            descripcion = "Explora las ruinas mayas con un guía experto.",
+            imagen = "https://elsalvador.travel/system/wp-content/uploads/2022/08/SantaAna.jpg",
+            fecha = "2024-06-02",
+            costo = 25.00,
+            idDestinoTuristico = 2
+        )
+        dbHelper.insertActividadTuristica(actividad2)
+
+        val actividad3 = ActividadTuristica(
+            nombre = "Senderismo en El Boquerón",
+            descripcion = "Recorre los senderos del volcán con vistas espectaculares.",
+            imagen = "https://www.contrapunto.com.sv/wp-content/uploads/2022/08/el-boqueron-2.png",
+            fecha = "2024-06-03",
+            costo = 10.00,
+            idDestinoTuristico = 3
+        )
+        dbHelper.insertActividadTuristica(actividad3)
+
+        val actividad4 = ActividadTuristica(
+            nombre = "Paseo en bote en Lago de Coatepeque",
+            descripcion = "Navega por las aguas cristalinas del lago de cráter.",
+            imagen = "https://cdn-pro.elsalvador.com/wp-content/uploads/2019/06/Lago-turquesa5.jpg",
+            fecha = "2024-06-04",
+            costo = 30.00,
+            idDestinoTuristico = 4
+        )
+        dbHelper.insertActividadTuristica(actividad4)
+
+        val actividad5 = ActividadTuristica(
+            nombre = "Surf en Playa El Tunco",
+            descripcion = "Aprende a surfear en una de las playas más famosas.",
+            imagen = "https://media.tacdn.com/media/attractions-splice-spp-674x446/0e/bb/53/46.jpg",
+            fecha = "2024-06-05",
+            costo = 15.00,
+            idDestinoTuristico = 5
+        )
+        dbHelper.insertActividadTuristica(actividad5)
+
+        val actividad6 = ActividadTuristica(
+            nombre = "Tour de flores en Ruta de las Flores",
+            descripcion = "Visita los coloridos pueblos y disfruta de las flores.",
+            imagen = "https://turismo.sv/wp-content/uploads/2019/06/ruta-de-las-flores-1.jpg",
+            fecha = "2024-06-06",
+            costo = 40.00,
+            idDestinoTuristico = 6
+        )
+        dbHelper.insertActividadTuristica(actividad6)
+
+        val actividad7 = ActividadTuristica(
+            nombre = "Excursión en Cerro Verde",
+            descripcion = "Descubre la naturaleza y disfruta de vistas panorámicas.",
+            imagen = "https://pbs.twimg.com/media/E-y4bJjXoAIy50Z.jpg:large",
+            fecha = "2024-06-07",
+            costo = 18.00,
+            idDestinoTuristico = 7
+        )
+        dbHelper.insertActividadTuristica(actividad7)
+
+        val actividad8 = ActividadTuristica(
+            nombre = "Exploración en Parque Nacional El Imposible",
+            descripcion = "Aventura a través de la biodiversidad del parque.",
+            imagen = "https://elsalvador.travel/system/wp-content/uploads/2021/04/10012021-El-Imposible-APPEX-5.jpg",
+            fecha = "2024-06-08",
+            costo = 22.00,
+            idDestinoTuristico = 8
+        )
+        dbHelper.insertActividadTuristica(actividad8)
+
+        val actividad9 = ActividadTuristica(
+            nombre = "Escalada en Puerta del Diablo",
+            descripcion = "Disfruta de una escalada desafiante con vistas impresionantes.",
+            imagen = "https://www.laprensagrafica.com/__export/1505083221154/sites/prensagrafica/img/2017/03/03/c2c604e1-07f2-4840-8ff6-4d67e50c6139.jpg_1758632411.jpg",
+            fecha = "2024-06-09",
+            costo = 20.00,
+            idDestinoTuristico = 9
+        )
+        dbHelper.insertActividadTuristica(actividad9)
+
+
+
 
 
     }

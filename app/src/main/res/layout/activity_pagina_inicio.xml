@@ -9,6 +9,7 @@
 
     <!-- Otras vistas -->
 
+
     <ImageButton
         android:id="@+id/btnHome"
         android:layout_width="60dp"
@@ -77,6 +78,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.003"
         app:srcCompat="@drawable/logoelsalvador" />
+
+    <ImageButton
+        android:id="@+id/btnInfo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Inicio"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.954"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/baseline_contact_phone_24"
+        app:tint="#9E9A9A"
+        tools:layout_editor_absoluteY="2dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/textView5"
