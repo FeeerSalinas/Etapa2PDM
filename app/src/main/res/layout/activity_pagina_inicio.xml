@@ -78,6 +78,21 @@
         app:layout_constraintVertical_bias="0.003"
         app:srcCompat="@drawable/logoelsalvador" />
 
+    <ImageButton
+        android:id="@+id/btnInfo"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Destacados"
+        android:tint="#7A7979"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.002"
+        app:srcCompat="@drawable/baseline_contact_phone_24" />
+
     <TextView
         android:id="@+id/textView5"
         android:layout_width="wrap_content"
