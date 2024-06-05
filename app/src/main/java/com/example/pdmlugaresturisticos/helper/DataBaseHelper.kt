@@ -133,6 +133,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME
         val id = db.insert(TABLE_DESTINOS_NAME, null, valuesDestino)
         db.close()
         return id
+
+
     }
 
     fun insertActividadTuristica(actividad: ActividadTuristica): Long {

@@ -90,9 +90,6 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
-
         val destino1 = DestinoTuristico(
             nombre = "Lago de Coatepeque",
             descripcion = " Un hermoso lago rodeado de volcanes y pueblos pintorescos.",
