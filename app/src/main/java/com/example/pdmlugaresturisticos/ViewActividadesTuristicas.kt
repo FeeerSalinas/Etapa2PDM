@@ -6,6 +6,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.ImageButton
 import android.widget.ListView
 import android.widget.Toast
@@ -26,7 +27,8 @@ class ViewActividadesTuristicas : AppCompatActivity(),
     private lateinit var listViewActividades: ListView
     private lateinit var btnBack: ImageButton
     private var actividadesList: List<ActividadTuristica> = listOf()
-
+    private val sharedPref = getSharedPreferences("miapp", Context.MODE_PRIVATE)
+    private val idRol = sharedPref.getInt("idRol",-1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_view_actividades_turisticas)
@@ -44,6 +46,17 @@ class ViewActividadesTuristicas : AppCompatActivity(),
             startActivity(intent)
 
         }
+        // Verificar si el rol es admin (idRol == 1)
+        if (idRol == 1) {
+            // Mostrar el botón si el usuario es admin
+
+            btnAgregar.visibility = View.VISIBLE
+        } else {
+            // Ocultar el botón si el usuario no es admin
+            btnAgregar.visibility = View.GONE
+        }
+
+
         val btnReservaciones: ImageButton = findViewById(R.id.btnReservaciones)
         btnReservaciones.setOnClickListener {
             val intent = Intent(this, DetallesReservaciones::class.java)
@@ -63,7 +76,8 @@ class ViewActividadesTuristicas : AppCompatActivity(),
                 this@ViewActividadesTuristicas,
                 actividadesList,
                 this@ViewActividadesTuristicas,
-                this@ViewActividadesTuristicas
+                this@ViewActividadesTuristicas,
+                idRol
             )
             listViewActividades.adapter = adapter
         }

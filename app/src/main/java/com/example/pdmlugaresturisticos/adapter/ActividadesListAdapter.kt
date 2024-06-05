@@ -15,7 +15,8 @@ class ActividadesListAdapter(
     private val context: Context,
     private val dataSource: List<ActividadTuristica>,
     private val onDeleteClickListener: OnDeleteClickListener,
-    private val onReserveClickListener: OnReserveClickListener
+    private val onReserveClickListener: OnReserveClickListener,
+    private val idRol: Int
 ) : BaseAdapter() {
 
     private val inflater: LayoutInflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -55,7 +56,15 @@ class ActividadesListAdapter(
         btnEliminarActividad.setOnClickListener {
             onDeleteClickListener.onDeleteClick(actividad)
         }
+        // Verificar si el rol es admin (idRol == 1)
+        if (idRol == 1) {
+            // Mostrar el botón si el usuario es admin
 
+            btnEliminarActividad.visibility = View.VISIBLE
+        } else {
+            // Ocultar el botón si el usuario no es admin
+            btnEliminarActividad.visibility = View.GONE
+        }
         // Cambiar ImageButton a Button
         val btnReservarActividad = rowView.findViewById<Button>(R.id.btnReservarActividad)
         btnReservarActividad.setOnClickListener {

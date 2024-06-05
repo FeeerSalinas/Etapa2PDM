@@ -119,7 +119,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.858"
-        app:srcCompat="@drawable/edit_icon" />
+        app:srcCompat="@drawable/edit_icon"
+        android:visibility="gone" />
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vpSitios"

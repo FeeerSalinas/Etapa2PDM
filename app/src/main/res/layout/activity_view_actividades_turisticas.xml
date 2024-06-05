@@ -27,7 +27,8 @@
         android:layout_marginEnd="31dp"
         android:backgroundTint="#00FFFFFF"
         android:scaleType="fitCenter"
-        android:src="@mipmap/agregar" />
+        android:src="@mipmap/agregar"
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/btnReservaciones"

@@ -1,10 +1,13 @@
 package com.example.pdmlugaresturisticos
 
+import android.content.Context
 import android.content.Intent
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
 import android.widget.ImageButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
@@ -22,7 +25,9 @@ class PaginaInicio : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_pagina_inicio)
-
+        // Obtener SharedPreferences
+        val sharedPref = getSharedPreferences("miapp", Context.MODE_PRIVATE)
+        val idRol = sharedPref.getInt("idRol",-1)
 
         init()
         setUpTransformer()
@@ -50,7 +55,15 @@ class PaginaInicio : AppCompatActivity() {
             startActivity(intent)
 
         }
+        // Verificar si el rol es admin (idRol == 1)
+        if (idRol == 1) {
+            // Mostrar el botón si el usuario es admin
 
+            btnAnadirSitio.visibility = View.VISIBLE
+        } else {
+            // Ocultar el botón si el usuario no es admin
+            btnAnadirSitio.visibility = View.GONE
+        }
         val btnDestacados: ImageButton = findViewById(R.id.btnDestacados)
         btnDestacados.setOnClickListener{
 
